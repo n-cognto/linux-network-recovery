@@ -1,5 +1,16 @@
 # Restoring Network Connection After Deleting Network Manager
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Steps to Restore Connectivity](#steps-to-restore-connectivity)
+  - [1. Bring Up the Network Interface](#1-bring-up-the-network-interface)
+  - [2. Identify Available Wireless Networks](#2-identify-available-wireless-networks)
+  - [3. Connect to a Wireless Network](#3-connect-to-a-wireless-network)
+  - [4. Obtain a Dynamic IP Address](#4-obtain-a-dynamic-ip-address)
+- [Alternative Connectivity Methods](#alternative-connectivity-methods)
+- [Updating System Packages](#updating-system-packages)
+
 ## Introduction
 
 Accidentally deleting Network Manager on a Linux system can lead to loss of network connectivity, making it challenging to reinstall packages or access online resources. This guide provides a step-by-step process to manually reconnect to Wi-Fi (or Ethernet as a fallback) and reinstall Network Manager. It assumes a Debian-based system like Ubuntu but includes notes for other distributions for broader applicability.
