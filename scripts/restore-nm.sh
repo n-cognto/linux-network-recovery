@@ -5,14 +5,30 @@
 # Author: n-cognto
 # License: MIT
 
-# Configure logging
-LOG_FILE="/var/log/restore-nm.log"
-exec 1> >(tee -a "$LOG_FILE")
-exec 2> >(tee -a "$LOG_FILE" >&2)
+# Enhanced logging configuration
+LOG_DIR="/var/log/network-recovery"
+LOG_FILE="$LOG_DIR/restore-nm.log"
+DEBUG_LOG="$LOG_DIR/debug.log"
 
-# Function to log messages
-log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+# Create log directory if it doesn't exist
+mkdir -p "$LOG_DIR"
+
+# Configure logging with rotation
+if [ -f "$LOG_FILE" ] && [ $(stat -f%z "$LOG_FILE") -gt 1048576 ]; then
+    mv "$LOG_FILE" "$LOG_FILE.old"
+fi
+
+# Function for different log levels
+log_info() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [INFO] $1" | tee -a "$LOG_FILE"
+}
+
+log_debug() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [DEBUG] $1" | tee -a "$DEBUG_LOG"
+}
+
+log_error() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [ERROR] $1" | tee -a "$LOG_FILE" >&2"
 }
 
 # Check for root privileges
